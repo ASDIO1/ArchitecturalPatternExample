@@ -19,7 +19,7 @@ namespace PastryShopAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PastryShopAPI.CategoryEntity", b =>
+            modelBuilder.Entity("PastryShopAPI.ProductEntity", b =>
                 {
                     b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace PastryShopAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Products");
                 });
 #pragma warning restore 612, 618
         }

@@ -42,7 +42,7 @@ namespace PastryShopAPI.Services
 
         public async Task<bool> DeleteProductAsync(long productId)
         {
-            await ValidateCategoryAsync(productId);
+            await ValidateProductAsync(productId);
             await _pastryShopRepository.CreateProductAsync(productId);
             var result = await _pastryShopRepository.SaveChangesAsync();
 
@@ -68,7 +68,7 @@ namespace PastryShopAPI.Services
 
             if (category == null)
             {
-                throw new NotFoundItemException($"The category with id: {productId} does not exists.");
+                throw new NotFoundItemException($"The product with id: {productId} does not exists.");
             }
 
 
@@ -77,7 +77,7 @@ namespace PastryShopAPI.Services
 
         public async Task<ProductModel> UpdateProductAsync(long productId, ProductModel updatedProduct)
         {
-            await ValidateCategoryAsync(productId);// GetTeamAsync(teamId);
+            await ValidateProductAsync(productId);// GetTeamAsync(teamId);
             updatedProduct.Id = productId;
             await _pastryShopRepository.UpdateProductAsync(productId, _mapper.Map<ProductEntity>(updatedProduct));
             var result = await _pastryShopRepository.SaveChangesAsync();
@@ -97,7 +97,7 @@ namespace PastryShopAPI.Services
 
             if (category == null)
             {
-                throw new NotFoundItemException($"The category with id: {productId} does not exists.");
+                throw new NotFoundItemException($"The product with id: {productId} does not exists.");
             }
         }
     }

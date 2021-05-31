@@ -8,8 +8,7 @@ namespace PastryShopAPI.Data
 {
     public class PastryShopDbContext : DbContext
     {
-        public DbSet<ProductEntity> Categories { get; set; }
-        // public DbSet<PlayerEntity> Players { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
 
         public PastryShopDbContext(DbContextOptions<PastryShopDbContext> options)
             : base(options)
@@ -20,13 +19,8 @@ namespace PastryShopAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ProductEntity>().ToTable("Categories");
-            modelBuilder.Entity<ProductEntity>().Property(c => c.Id).ValueGeneratedOnAdd();
-            //modelBuilder.Entity<CategoryEntity>().HasMany(t => t.Players).WithOne(p => p.Team);
-
-            /*modelBuilder.Entity<PlayerEntity>().ToTable("Players");
-            modelBuilder.Entity<PlayerEntity>().Property(p => p.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<PlayerEntity>().HasOne(p => p.Team).WithMany(t => t.Players);*/
+            modelBuilder.Entity<ProductEntity>().ToTable("Products");
+            modelBuilder.Entity<ProductEntity>().Property(p => p.Id).ValueGeneratedOnAdd();
 
             //dotnet tool install --global dotnet-ef
             //dotnet ef migrations add InitialCreate

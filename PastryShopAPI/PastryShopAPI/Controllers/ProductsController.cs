@@ -13,21 +13,21 @@ namespace PastryShopAPI.Controllers
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        private IProductsService _categoriesService;
+        private IProductsService _productsService;
 
-        public ProductsController(IProductsService categoriesService)
+        public ProductsController(IProductsService productsService)
         {
-            _categoriesService = categoriesService;
+            _productsService = productsService;
         }
 
         // api/teams
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductModel>>> GetCategoriesAsync(string orderBy = "Id")
+        public async Task<ActionResult<IEnumerable<ProductModel>>> GetProductsAsync(string orderBy = "Id")
         {
             try
             {
-                var categories = await _categoriesService.GetProductsAsync(orderBy);
-                return Ok(categories);
+                var products = await _productsService.GetProductsAsync(orderBy);
+                return Ok(products);
             }
             catch (InvalidOperationItemException ex)
             {
@@ -40,13 +40,13 @@ namespace PastryShopAPI.Controllers
         }
 
         // api/teams/2
-        [HttpGet("{categoryId:long}")]
-        public async Task<ActionResult<ProductModel>> GetCategoryAsync(long categoryId)// public async Task<ActionResult<CategoryWithProductModel>> GetProductAsync(long teamId)
+        [HttpGet("{productId:long}")]
+        public async Task<ActionResult<ProductModel>> GetProductAsync(long productId)// public async Task<ActionResult<CategoryWithProductModel>> GetProductAsync(long teamId)
         {
             try
             {
-                var team = await _categoriesService.GetProductAsync(categoryId);
-                return Ok(team);
+                var product = await _productsService.GetProductAsync(productId);
+                return Ok(product);
             }
             catch (NotFoundItemException ex)
             {
@@ -60,15 +60,15 @@ namespace PastryShopAPI.Controllers
 
         // api/teams
         [HttpPost]
-        public async Task<ActionResult<ProductModel>> CreateCategoryAsync([FromBody] ProductModel newCategory)
+        public async Task<ActionResult<ProductModel>> CreateProductAsync([FromBody] ProductModel newProduct)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var category = await _categoriesService.CreateProductAsync(newCategory);
-                return Created($"/api/categories/{category.Id}", category);
+                var product = await _productsService.CreateProductAsync(newProduct);
+                return Created($"/api/products/{product.Id}", product);
             }
             catch (Exception)
             {
@@ -76,12 +76,12 @@ namespace PastryShopAPI.Controllers
             }
         }
 
-        [HttpDelete("{categoryId:long}")]
-        public async Task<ActionResult<bool>> DeleteCategoryAsync(long categoryId)
+        [HttpDelete("{productId:long}")]
+        public async Task<ActionResult<bool>> DeleteProductAsync(long productId)
         {
             try
             {
-                var result = await _categoriesService.DeleteProductAsync(categoryId);
+                var result = await _productsService.DeleteProductAsync(productId);
                 return Ok(result);
             }
             catch (NotFoundItemException ex)
@@ -94,24 +94,13 @@ namespace PastryShopAPI.Controllers
             }
         }
 
-        [HttpPut("{categoryId:long}")]
-        public async Task<ActionResult<ProductModel>> UpdateCategoryAsync(long categoryId, [FromBody] ProductModel updatedCategory)
+        [HttpPut("{productId:long}")]
+        public async Task<ActionResult<ProductModel>> UpdateProductAsync(long productId, [FromBody] ProductModel updatedProduct)
         {
             try
             {
-                /*if (!ModelState.IsValid)
-                {
-                    foreach (var pair in ModelState)
-                    {
-                        if (pair.Key == nameof(updatedTeam.City) && pair.Value.Errors.Count > 0)
-                        {
-                            return BadRequest(pair.Value.Errors);
-                        }
-                    }
-                }*/
-
-                var category = await _categoriesService.UpdateProductAsync(categoryId, updatedCategory);
-                return Ok(category);
+                var product = await _productsService.UpdateProductAsync(productId, updatedProduct);
+                return Ok(product);
             }
             catch (NotFoundItemException ex)
             {

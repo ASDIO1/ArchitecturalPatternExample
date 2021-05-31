@@ -8,7 +8,7 @@ namespace PastryShopAPI.Migrations
         {
             migrationBuilder.AddColumn<string>(
                 name: "ImageUrl",
-                table: "Categories",
+                table: "Products",
                 nullable: true);
         }
 
@@ -16,7 +16,7 @@ namespace PastryShopAPI.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "ImageUrl",
-                table: "Categories");
+                table: "Products");
         }
     }
 }

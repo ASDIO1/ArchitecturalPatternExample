@@ -8,7 +8,7 @@ namespace PastryShopAPI.Migrations
         {
             migrationBuilder.AddColumn<long>(
                 name: "Price",
-                table: "Categories",
+                table: "Products",
                 nullable: true);
         }
 
@@ -16,7 +16,7 @@ namespace PastryShopAPI.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Price",
-                table: "Categories");
+                table: "Products");
         }
     }
 }

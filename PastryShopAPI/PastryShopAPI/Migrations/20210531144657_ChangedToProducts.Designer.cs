@@ -10,8 +10,8 @@ using PastryShopAPI.Data;
 namespace PastryShopAPI.Migrations
 {
     [DbContext(typeof(PastryShopDbContext))]
-    [Migration("20210522231126_addedImgColumn")]
-    partial class addedImgColumn
+    [Migration("20210531144657_ChangedToProducts")]
+    partial class ChangedToProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace PastryShopAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PastryShopAPI.CategoryEntity", b =>
+            modelBuilder.Entity("PastryShopAPI.ProductEntity", b =>
                 {
                     b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,6 +36,9 @@ namespace PastryShopAPI.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("Price")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

@@ -42,7 +42,7 @@ namespace PastryShopAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Products");
                 });
 #pragma warning restore 612, 618
         }

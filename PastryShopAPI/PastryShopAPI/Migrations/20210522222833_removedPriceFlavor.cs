@@ -8,24 +8,24 @@ namespace PastryShopAPI.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Flavors",
-                table: "Categories");
+                table: "Products");
 
             migrationBuilder.DropColumn(
                 name: "Price",
-                table: "Categories");
+                table: "Products");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
                 name: "Flavors",
-                table: "Categories",
+                table: "Products",
                 type: "nvarchar(max)",
                 nullable: true);
 
             migrationBuilder.AddColumn<long>(
                 name: "Price",
-                table: "Categories",
+                table: "Products",
                 type: "bigint",
                 nullable: true);
         }

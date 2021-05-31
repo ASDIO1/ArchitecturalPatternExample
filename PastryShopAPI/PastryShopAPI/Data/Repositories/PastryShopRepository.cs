@@ -15,20 +15,20 @@ namespace PastryShopAPI.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public void CreateProduct(ProductEntity newCategory)
+        public void CreateProduct(ProductEntity newProduct)
         {
-            _dbContext.Categories.Add(newCategory);
+            _dbContext.Products.Add(newProduct);
         }
 
-        public async Task CreateProductAsync(long categoryId)
+        public async Task CreateProductAsync(long productId)
         {
-            var categoryToDelete = await _dbContext.Categories.FirstAsync(c => c.Id == categoryId);
-            _dbContext.Categories.Remove(categoryToDelete);
+            var productToDelete = await _dbContext.Products.FirstAsync(c => c.Id == productId);
+            _dbContext.Products.Remove(productToDelete);
         }
 
         public async Task<IEnumerable<ProductEntity>> GetProductsAsync(string orderBy = "Id")
         {
-            IQueryable<ProductEntity> query = _dbContext.Categories;
+            IQueryable<ProductEntity> query = _dbContext.Products;
             query = query.AsNoTracking();
 
             switch (orderBy.ToLower())
@@ -39,9 +39,6 @@ namespace PastryShopAPI.Data.Repositories
                 case "price":
                     query = query.OrderBy(c => c.Price);
                     break;
-                /*case "flavors":
-                    query = query.OrderBy(c => c.Flavors);
-                    break;*/
                 default:
                     query = query.OrderBy(c => c.Id);
                     break;
@@ -50,22 +47,20 @@ namespace PastryShopAPI.Data.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task UpdateProductAsync(long categoryId, ProductEntity updatedCategory)
+        public async Task UpdateProductAsync(long productId, ProductEntity updatedProduct)
         {
-            var category = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+            var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == productId);
 
-            category.Name = updatedCategory.Name ?? category.Name;
-            category.Description = updatedCategory.Description ?? category.Description;
-            category.ImageUrl = updatedCategory.ImageUrl ?? category.ImageUrl;
-            category.Price = updatedCategory.Price ?? category.Price;
-            // category.Flavors = updatedCategory.Flavors ?? category.Flavors;
+            product.Name = updatedProduct.Name ?? product.Name;
+            product.Description = updatedProduct.Description ?? product.Description;
+            product.ImageUrl = updatedProduct.ImageUrl ?? product.ImageUrl;
+            product.Price = updatedProduct.Price ?? product.Price;
         }
-        public async Task<ProductEntity> GetProductAsync(long categoryId)
+        public async Task<ProductEntity> GetProductAsync(long productId)
         {
-            IQueryable<ProductEntity> query = _dbContext.Categories;
+            IQueryable<ProductEntity> query = _dbContext.Products;
             query = query.AsNoTracking();
-            //query = query.Include(t => t.Players);
-            return await query.FirstOrDefaultAsync(c => c.Id == categoryId);
+            return await query.FirstOrDefaultAsync(c => c.Id == productId);
 
             //hit to database
             //tolist()
