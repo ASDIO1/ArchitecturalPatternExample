@@ -90,7 +90,7 @@ namespace PastryShopAPI.Services
             return _mapper.Map<ProductModel>(updatedProduct);
         }
 
-        private async Task ValidateCategoryAsync(long productId)
+        private async Task ValidateProductAsync(long productId)
         {
             // await GetProductAsync(teamId);
             var category = await _pastryShopRepository.GetProductAsync(productId);
